@@ -11,7 +11,6 @@
  * "Silabs_License_Agreement.txt" for details. Before using this software for
  * any purpose, you must agree to the terms of that agreement.
  **************************************************************************************************/
-
 /*****************************************************************************************************
  * Owner: Poorn Mehta (Poorn.Mehta@Colorado.EDU)
  * Date Last Modified: 12/06/2018

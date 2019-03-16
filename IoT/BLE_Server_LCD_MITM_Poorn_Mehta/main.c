@@ -16,7 +16,6 @@
  **************************************************************************************************/
 
 
-
 #include "src/main.h"
 
 /* Libraries containing default Gecko configuration values */

@@ -13,8 +13,6 @@
  * "Silabs_License_Agreement.txt" for details. Before using this software for
  * any purpose, you must agree to the terms of that agreement.
  **************************************************************************************************/
-
-
 //// Gecko configuration parameters (see gecko_configuration.h)
 ///*static const gecko_configuration_t config = {
 //  .config_flags = 0,
