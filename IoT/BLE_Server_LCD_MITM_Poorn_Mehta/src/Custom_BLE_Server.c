@@ -22,7 +22,7 @@
 // Functions
 //***********************************************************************************
 
-bool bonding_status = 0;
+//bool bonding_status = 0;
 
 void Server_Address(void)
 {
@@ -40,18 +40,19 @@ void Custom_BLE_Server_Delete_Bondings(void)
 {
     LCD_write("Delete Bondings?", LCD_ROW_PASSKEY);
     LCD_write("PB0-Yes PB1-No", LCD_ROW_ACTION);
-    valid_button_press = true;
+    NVIC_EnableIRQ(GPIO_EVEN_IRQn);
+    NVIC_EnableIRQ(GPIO_ODD_IRQn);
     SLEEP_Sleep();
     if(button0_read == true)
     {
     	gecko_cmd_sm_delete_bondings();
     }
-    else if(button1_read == true)
-    {
-    	bonding_status = 1;
-        LCD_write(" ", LCD_ROW_PASSKEY);
-        LCD_write(" ", LCD_ROW_ACTION);
-    }
+//    else if(button1_read == true)
+//    {
+//    	bonding_status = 1;
+//    }
+    LCD_write(" ", LCD_ROW_PASSKEY);
+    LCD_write(" ", LCD_ROW_ACTION);
     button0_read = false;
     button1_read = false;
 }
@@ -59,10 +60,10 @@ void Custom_BLE_Server_Delete_Bondings(void)
 
 void Custom_BLE_Server_Get_Temperature_Send_Notification(void)
 {
-	  if(bonding_status)
-	  {
-		  LCD_write("Already Bonded", LCD_ROW_ACTION);
-	  }
+//	  if(bonding_status)
+//	  {
+//		  LCD_write("Already Bonded", LCD_ROW_ACTION);
+//	  }
 	  Custom_I2C0_Init();	// Initializing I2C from scratch. Everything except clocks are
 	  	  	  	  	  	    // initialized over here.
 

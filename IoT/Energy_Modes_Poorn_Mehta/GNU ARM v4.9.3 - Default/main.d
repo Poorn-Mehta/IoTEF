@@ -1,5 +1,9 @@
-main.o: ../main.c ../init_mcu.h ../init_board.h ../ble-configuration.h \
- ../board_features.h \
+main.o: ../main.c ../src/main.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/init_mcu.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/init_board.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/ble-configuration.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/board_features.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/ble-configuration.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\soc/native_gecko.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/hal-config.h \
@@ -67,25 +71,31 @@ main.o: ../main.c ../init_mcu.h ../init_board.h ../ble-configuration.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_errorcodes.h \
- ../gatt_db.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/gatt_db.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_emu.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_cmu.h \
- ../hal-config.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\common\halconfig/bsphalconfig.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\common\bsp/bsp_bcp.h \
- ../src/main.h ../src/gpio.h ../src/main.h ../src/cmu.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_core.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_common.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_letimer.h
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_letimer.h \
+ ../src/cmu.h ../src/main.h ../src/letimer.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/main.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/gpio.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/main.h
 
-../init_mcu.h:
+../src/main.h:
 
-../init_board.h:
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/init_mcu.h:
 
-../ble-configuration.h:
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/init_board.h:
 
-../board_features.h:
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/ble-configuration.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/board_features.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/ble-configuration.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h:
 
@@ -221,7 +231,7 @@ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\b
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_errorcodes.h:
 
-../gatt_db.h:
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/gatt_db.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h:
 
@@ -229,22 +239,24 @@ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\e
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_cmu.h:
 
-../hal-config.h:
-
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\common\halconfig/bsphalconfig.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\common\bsp/bsp_bcp.h:
-
-../src/main.h:
-
-../src/gpio.h:
-
-../src/main.h:
-
-../src/cmu.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_core.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_common.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_letimer.h:
+
+../src/cmu.h:
+
+../src/main.h:
+
+../src/letimer.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/main.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/gpio.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/main.h:

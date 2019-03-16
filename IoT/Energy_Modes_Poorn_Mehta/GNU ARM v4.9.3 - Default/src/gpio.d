@@ -1,7 +1,16 @@
 src/gpio.o: ../src/gpio.c \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/gpio.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/main.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_gpio.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/init_mcu.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/init_board.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/ble-configuration.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/board_features.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/ble-configuration.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\soc/native_gecko.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/hal-config.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/board_features.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\EFR32BG13_BRD4104A\config/hal-config-board.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/em_device.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/efr32bg13p632f512gm48.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\CMSIS\Include/core_cm4.h \
@@ -56,14 +65,47 @@ src/gpio.o: ../src/gpio.c \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/efr32bg13p_dmareq.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/efr32bg13p_af_ports.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/efr32bg13p_af_pins.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\halconfig\inc\hal-config/hal-config-types.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_gpio.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_bus.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_assert.h
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_assert.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/gecko_configuration.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_errorcodes.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/gatt_db.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_emu.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_cmu.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\common\halconfig/bsphalconfig.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\common\bsp/bsp_bcp.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_core.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_common.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_letimer.h
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/gpio.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/src/main.h:
 
-C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_gpio.h:
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/init_mcu.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/init_board.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/ble-configuration.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/board_features.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/ble-configuration.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\soc/native_gecko.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/hal-config.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/board_features.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\EFR32BG13_BRD4104A\config/hal-config-board.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/em_device.h:
 
@@ -173,6 +215,36 @@ C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\D
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/efr32bg13p_af_pins.h:
 
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\halconfig\inc\hal-config/hal-config-types.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_gpio.h:
+
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_bus.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_assert.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/gecko_configuration.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_errorcodes.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta/gatt_db.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_emu.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_cmu.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\common\halconfig/bsphalconfig.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\hardware\kit\common\bsp/bsp_bcp.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_core.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_common.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\Energy_Modes_Poorn_Mehta\platform\emlib\inc/em_letimer.h:

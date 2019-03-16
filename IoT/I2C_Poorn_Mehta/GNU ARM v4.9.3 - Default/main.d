@@ -1,4 +1,4 @@
-main.o: ../main.c \
+main.o: ../main.c ../src/main.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_emu.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/em_device.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\Device\SiliconLabs\EFR32BG13P\Include/efr32bg13p632f512gm48.h \
@@ -57,28 +57,29 @@ main.o: ../main.c \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_bus.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_cmu.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_assert.h \
- ../hal-config.h ../board_features.h ../ble-configuration.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\EFR32BG13_BRD4104A\config/hal-config-board.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\halconfig\inc\hal-config/hal-config-types.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_gpio.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\common\halconfig/bsphalconfig.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/hal-config.h \
- C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\common\bsp/bsp_bcp.h \
- ../src/main.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_core.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_common.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/init_mcu.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/init_board.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/ble-configuration.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/board_features.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/ble-configuration.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\soc/native_gecko.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/hal-config.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/board_features.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\EFR32BG13_BRD4104A\config/hal-config-board.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\halconfig\inc\hal-config/hal-config-types.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_gpio.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/gecko_configuration.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_errorcodes.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/gatt_db.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h \
+ ../hal-config.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\common\halconfig/bsphalconfig.h \
+ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\common\bsp/bsp_bcp.h \
  ../src/gpio.h ../src/main.h ../src/cmu.h ../src/Custom_I2C0.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/src/main.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_i2c.h \
@@ -91,6 +92,8 @@ main.o: ../main.c \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/src/Custom_Timer0.h \
  C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_timer.h \
  ../src/Custom_Sleep.h ../src/Custom_Si7021.h ../src/Custom_Timer0.h
+
+../src/main.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_emu.h:
 
@@ -208,26 +211,6 @@ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_assert.h:
 
-../hal-config.h:
-
-../board_features.h:
-
-../ble-configuration.h:
-
-C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\EFR32BG13_BRD4104A\config/hal-config-board.h:
-
-C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\halconfig\inc\hal-config/hal-config-types.h:
-
-C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_gpio.h:
-
-C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\common\halconfig/bsphalconfig.h:
-
-C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/hal-config.h:
-
-C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\common\bsp/bsp_bcp.h:
-
-../src/main.h:
-
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_core.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_common.h:
@@ -240,9 +223,21 @@ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/ble-configuration.h
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/board_features.h:
 
+C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/ble-configuration.h:
+
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_types.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\soc/native_gecko.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/hal-config.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/board_features.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\EFR32BG13_BRD4104A\config/hal-config-board.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\halconfig\inc\hal-config/hal-config-types.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\emlib\inc/em_gpio.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/gecko_configuration.h:
 
@@ -255,6 +250,12 @@ C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta/gatt_db.h:
 
 C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\protocol\bluetooth\ble_stack\inc\common/bg_gattdb_def.h:
+
+../hal-config.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\common\halconfig/bsphalconfig.h:
+
+C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\hardware\kit\common\bsp/bsp_bcp.h:
 
 ../src/gpio.h:
 

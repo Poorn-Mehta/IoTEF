@@ -1,4 +1,4 @@
-// Copyright 2018 Silicon Laboratories, Inc.
+// Copyright 2019 Silicon Laboratories, Inc.
 //
 //
 
@@ -18,5 +18,6 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 #define gattdb_temperature_measurement         15
 #define gattdb_ota_control                     19
 #define gattdb_tx_power_level                  22
+#define gattdb_tmp2                            25
 
 #endif

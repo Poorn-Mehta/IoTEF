@@ -16,6 +16,8 @@
 #define Slave_Lat_Val	3		// Skipping 3, connection event on 4th - 4*75 = 300ms
 #define Timeout_Val		10000
 
+#define No_Bonding		0xFF
+#define SM_Config		0x07
 
 #define Scan_Interval                 16   //10ms
 #define Scan_Window                   16   //10ms
@@ -61,7 +63,7 @@ typedef enum {
   disconnected,
   scanning,
   target_server_found,
-  connected,
+  connection_opened,
   paired,
   bonded,
   primary_services_search,

@@ -37,35 +37,60 @@ void Client_Address(void)
 
 void Custom_BLE_Client_Delete_Bondings(void)
 {
-    Dev_State = disconnected;
+	//initializing state variable and displaying relevant information
+	Dev_State = disconnected;
     LCD_write("Delete Bondings?", LCD_ROW_PASSKEY);
     LCD_write("PB0-Yes PB1-No", LCD_ROW_ACTION);
-    valid_button_press = true;
+
+    //enabling button interrupts
+    NVIC_EnableIRQ(GPIO_EVEN_IRQn);
+    NVIC_EnableIRQ(GPIO_ODD_IRQn);
+
+    //going to sleep till buttons are pressed
     SLEEP_Sleep();
+
+    //check whether to delete bonding information or not
     if(button0_read == true)
     {
     	gecko_cmd_sm_delete_bondings();
     }
+//    else if(button1_read == true)
+//    {
+//    	bonding_status = 1;
+//    }
+
+    //resetting necessary things
+    LCD_write(" ", LCD_ROW_PASSKEY);
+    LCD_write(" ", LCD_ROW_ACTION);
     button0_read = false;
     button1_read = false;
 }
 
 void Custom_BLE_Client_Check_for_Target_Server(void)
 {
+	//read advertiser's address from structure
 	bd_addr Remote_Address = evt->data.evt_le_gap_scan_response.address;
+
+	//print that address
 	char Remote_Address_String[18];
 	snprintf(Remote_Address_String, sizeof(Remote_Address_String),
 			"%0.2X:%0.2X:%0.2X:%0.2X:%0.2X:%0.2X",
 			Remote_Address.addr[5], Remote_Address.addr[4], Remote_Address.addr[3],
 			Remote_Address.addr[2], Remote_Address.addr[1], Remote_Address.addr[0]);
 	LCD_write(Remote_Address_String, LCD_ROW_CLIENTADDR);
+
+	//check for connectable scannable undirected advertising
 	if(evt->data.evt_le_gap_scan_response.packet_type == 0)
 	{
+		//check for address match
 		if(memcmp(&evt->data.evt_le_gap_scan_response.address.addr[0],
 				&Server_Addr.addr[0], Server_Address_Length) == 0)
 		{
+			//if it is the target server then update state and display
 			Dev_State = target_server_found;
 			LCD_write("Server Found", LCD_ROW_ACTION);
+
+			//attempt to connect to the server directly
 			Custom_BLE_Client_Connect_to_Server(Server_Addr);
 		}
 	}
@@ -85,12 +110,21 @@ void Print_Remote_Address(void)
 void Custom_BLE_Client_Confirm_Passkey(void)
 {
 	uint32_t key;
+
+	//reading key from structure
 	key = evt->data.evt_sm_confirm_passkey.passkey; // reading passkey
+
+	//displaying key
 	char Passkey_String[7];
 	snprintf(Passkey_String, sizeof(Passkey_String), "%0.6ld", key);	// printing the passkey
 	LCD_write(Passkey_String, LCD_ROW_PASSKEY);
+
+	//display information about how to confirm key
 	LCD_write("PB0-Accept PB1-Reject", LCD_ROW_ACTION);
-	valid_button_press = 1;
+
+	//enable button interrupts
+    NVIC_EnableIRQ(GPIO_EVEN_IRQn);
+    NVIC_EnableIRQ(GPIO_ODD_IRQn);
 }
 
 void Custom_BLE_Client_Connect_to_Server(bd_addr Target_Address)
@@ -100,29 +134,35 @@ void Custom_BLE_Client_Connect_to_Server(bd_addr Target_Address)
 			gecko_cmd_le_gap_connect(Target_Address, le_gap_address_type_public, le_gap_phy_1m);
 	if(Response->result == 0)
 	{
-		Dev_State = connected;
-		LCD_write("Connected", LCD_ROW_ACTION);
+		Dev_State = connection_opened;
+		LCD_write("Connection Start", LCD_ROW_ACTION);
 	}
 	else
 	{
 		LCD_write("Connection Failed", LCD_ROW_PASSKEY);
 		LCD_write("PB0-Retry PB1-Stop", LCD_ROW_ACTION);
-		valid_button_press = 1;
+	    NVIC_EnableIRQ(GPIO_EVEN_IRQn);
+	    NVIC_EnableIRQ(GPIO_ODD_IRQn);
 	}
 }
 
 void Custom_BLE_Client_Discover_Primary_Services_by_UUID(uint8_t length, const uint8_t *uuid)
 {
+	//call the API to start looking for given service
 	struct gecko_msg_gatt_discover_primary_services_by_uuid_rsp_t*	Response;
 	Response = gecko_cmd_gatt_discover_primary_services_by_uuid(
 			Connection_Handle, length,  uuid);
+
+	//check whether the API call was successful or not
 	if(Response->result != 0)
 	{
+		//if failed then print error and close the connection
 		LCD_write("Error-Service Search", LCD_ROW_PASSKEY);
 		Custom_BLE_Client_Close_Connection();
 	}
 	else
 	{
+		//update information and state variable if API call was successful
 		LCD_write("Service Search", LCD_ROW_ACTION);
 		Dev_State = primary_services_search;
 	}
@@ -130,6 +170,7 @@ void Custom_BLE_Client_Discover_Primary_Services_by_UUID(uint8_t length, const u
 
 void Custom_BLE_Client_Discover_Characteristics_by_UUID(uint32_t service_handle, uint8_t length, const uint8_t *uuid)
 {
+	//call the API
 	struct gecko_msg_gatt_discover_characteristics_by_uuid_rsp_t* Response;
 	Response = gecko_cmd_gatt_discover_characteristics_by_uuid(Connection_Handle, service_handle,
 			length, uuid);
@@ -140,12 +181,14 @@ void Custom_BLE_Client_Discover_Characteristics_by_UUID(uint32_t service_handle,
 	}
 	else
 	{
+		//update the state if API call was successful
 		Dev_State = characteristics_search;
 	}
 }
 
 void Custom_BLE_Client_Set_Indications(uint16_t characteristic_handle)
 {
+	//call the proper API
 	struct gecko_msg_gatt_set_characteristic_notification_rsp_t* Response;
 	Response = gecko_cmd_gatt_set_characteristic_notification(Connection_Handle,
 			characteristic_handle, gatt_indication);
@@ -158,6 +201,7 @@ void Custom_BLE_Client_Set_Indications(uint16_t characteristic_handle)
 	}
 	else
 	{
+		//if API was successful then update lcd and state
 		LCD_write("Indication Set", LCD_ROW_PASSKEY);
 		Dev_State = indications_enabled;
 	}
@@ -165,9 +209,13 @@ void Custom_BLE_Client_Set_Indications(uint16_t characteristic_handle)
 
 void Custom_BLE_Client_Look_for_Service(const uint8_t *uuid, uint8_t length)
 {
+	//compare uuid
 	if(memcmp(&evt->data.evt_gatt_service.uuid.data[0],	uuid, length) == 0)
 	{
+		//if match then update lcd and state
 		LCD_write("Service Found", LCD_ROW_ACTION);
+
+		//store service handle for further use
 		Service_Handle = evt->data.evt_gatt_service.service;
 		Dev_State = health_thermometer_service_found;
 	}
@@ -179,9 +227,13 @@ void Custom_BLE_Client_Look_for_Service(const uint8_t *uuid, uint8_t length)
 
 void Custom_BLE_Client_Look_for_Characteristic(const uint8_t *uuid, uint8_t length)
 {
+	//compare uuid
 	if(memcmp(&evt->data.evt_gatt_characteristic.uuid.data[0], uuid, length) == 0)
 	{
+		//if match then update lcd and state
 		LCD_write("Characteristic Found", LCD_ROW_ACTION);
+
+		//store characteristic handle for further use
 		Characteristic_Handle = evt->data.evt_gatt_characteristic.characteristic;
 		Dev_State = temperature_characterstic_found;
 	}
@@ -203,10 +255,14 @@ void Custom_BLE_Client_Close_Connection(void)
 
 void Custom_BLE_Client_Get_Temperature_Send_Confirmation(void)
 {
+	//check whether the indication is for temperature characteristic and that it is indeed
+	//indication and not a notification
 	if((evt->data.evt_gatt_characteristic_value.characteristic == Characteristic_Handle)
 			&& (evt->data.evt_gatt_characteristic_value.att_opcode == gatt_handle_value_indication))
 	{
 //		LCD_write("Current Temperature", LCD_ROW_ACTION);
+
+		//temperature reading and displaying code
 		uint8_t Temperature_Array[Temperature_Byte_Stream_Length];
 		memcpy(Temperature_Array, &evt->data.evt_gatt_characteristic_value.value.data[0], Temperature_Byte_Stream_Length);
 		int32_t Temperature_Value;
@@ -215,6 +271,8 @@ void Custom_BLE_Client_Get_Temperature_Send_Confirmation(void)
 		snprintf(Temperature_Print, Temperature_Print_Array_Length, "Temp: %0.2ld.%0.3luC",
 				(Temperature_Value / 1000), (Temperature_Value % 1000));
 		LCD_write(Temperature_Print, LCD_ROW_TEMPVALUE);
+
+		//sending indication confirmation to the server
 		struct gecko_msg_gatt_send_characteristic_confirmation_rsp_t* Response;
 		Response = gecko_cmd_gatt_send_characteristic_confirmation(Connection_Handle);
 		if(Response->result != 0)

@@ -22,15 +22,18 @@
 
 #define Button0_port	gpioPortF
 #define Button0_pin		6
+#define Button0_Interrupt_Mask	0x40
+
 #define Button1_port	gpioPortF
 #define Button1_pin		7
+#define Button1_Interrupt_Mask	0x80
 
 //***********************************************************************************
 // global variables
 //***********************************************************************************
 
-extern bool button0_read;
-extern bool button1_read;
+extern volatile bool button0_read;
+extern volatile bool button1_read;
 extern bool valid_button_press;
 
 

@@ -18,12 +18,18 @@
 #define Timeout_Val		10000
 #define BG13_Min_Power	-300	// From datasheet, value in dB = absolute value / 10
 #define BG13_Max_Power	105		// From datasheet
+#define Change_in_Characteristic_Status		0x01
+#define Indications_Enabled		0x02
+#define Notifications_Disabled		0x00
+#define Temperature_Print_Length	8
+#define No_Bonding		0xFF
+#define SM_Config		0x07
 
 //***********************************************************************************
 // global variables
 //***********************************************************************************
 
-extern bool bonding_status;
+//extern bool bonding_status;
 
 //***********************************************************************************
 // function prototypes

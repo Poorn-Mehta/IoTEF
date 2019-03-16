@@ -9,7 +9,4 @@
   <file name="init_board.c" uri="studio:/project/init_board.c"/>
   <file name="init_mcu.c" uri="studio:/project/init_mcu.c"/>
   <file name="create_bl_files.bat" uri="studio:/project/create_bl_files.bat"/>
-  <includePath uri="studio:/project/"/>
-  <toolOption partCompatibility=".*" toolId="iar.arm.toolchain.linker.v5.4.0" optionId="iar.arm.toolchain.linker.option.icfFile.v5.4.0" value="${workspace_loc:/${ProjName}/efr32bg13p632f512gm48.icf}"/>
-  <toolOption toolchainCompatibility="gcc" toolId="com.silabs.ide.si32.gcc.cdt.managedbuild.toolchain.exe" optionId="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.linker.script" value="${workspace_loc:/${ProjName}/efr32bg13p632f512gm48.ld}"/>
 </project>

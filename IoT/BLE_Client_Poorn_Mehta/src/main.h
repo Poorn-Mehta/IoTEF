@@ -52,6 +52,8 @@ extern bd_addr Server_Addr;
 
 extern uint8_t Connection_Handle, Services_Count, Characteristics_Count;
 
+extern bool bonding_failure_flag;
+
 extern uint32_t Service_Handle;
 extern uint16_t Characteristic_Handle;
 

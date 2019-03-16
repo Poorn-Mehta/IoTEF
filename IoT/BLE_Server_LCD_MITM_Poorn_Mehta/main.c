@@ -94,9 +94,8 @@ uint8_t boot_to_dfu = 0;
 
 uint32_t Interrupt_Read;	// To know which interrupt has caused the device
 							// to come out of sleep
-bool button0_read = 0;
-bool button1_read = 0;
-bool valid_button_press = 0;
+volatile bool button0_read = 0;
+volatile bool button1_read = 0;
 uint8_t Connection_Handle = 0;
 
 //***********************************************************************************
@@ -113,12 +112,12 @@ void GPIO_EVEN_IRQHandler(void)
 	CORE_AtomicDisableIrq();
 	Interrupt_Read = GPIO_IntGet();
 	GPIO_IntClear(Interrupt_Read);
-	if((Interrupt_Read == 0x40) && (valid_button_press != 0))// Button is pressed exactly when required
+	if(Interrupt_Read == Button0_Interrupt_Mask)
 	{
-		button0_read = 1;
-		valid_button_press = 0;
+		button0_read = true;
 	}
 	gecko_external_signal(Event_Button0_Pressed);
+	NVIC_DisableIRQ(GPIO_EVEN_IRQn);
 	CORE_AtomicEnableIrq();
 }
 
@@ -127,12 +126,12 @@ void GPIO_ODD_IRQHandler(void)
 	CORE_AtomicDisableIrq();
 	Interrupt_Read = GPIO_IntGet();
 	GPIO_IntClear(Interrupt_Read);
-	if((Interrupt_Read == 0x80) && (valid_button_press != 0))
+	if(Interrupt_Read == Button1_Interrupt_Mask)
 	{
-		button1_read = 1;
-		valid_button_press = 0;
+		button1_read = true;
 	}
 	gecko_external_signal(Event_Button1_Pressed);
+	NVIC_DisableIRQ(GPIO_ODD_IRQn);
 	CORE_AtomicEnableIrq();
 }
 
@@ -140,7 +139,7 @@ void LETIMER0_IRQHandler(void)		// Letimer ISR, will execute after every 3 secon
 {
 	CORE_AtomicDisableIrq();	// Nested interrupts not supported
 	Interrupt_Read = LETIMER_IntGetEnabled(LETIMER0);	// Reading interrupt flag register
-	LETIMER_IntClear(LETIMER0, 0x1F);	// I like to clear all the interrupts so
+	LETIMER_IntClear(LETIMER0, Interrupt_Read);	// I like to clear all the interrupts so
 	if(Interrupt_Read == LETIMER_IF_UF)	// Check for the specific interrupt
 	{
 		gecko_external_signal(Event_Letimer_Period_Reached);
@@ -196,6 +195,9 @@ int main(void)
   uint32_t Event_Read;	// This variable is used to indicate which external
 			// event has occurred
   int8_t RSSI_Value;
+  uint8_t bonding_state = No_Bonding;
+  bool passkey_event_entered = false;
+  bool bonding_failure_flag = false;
   bool Notifications_Status = 0;	// Send notifications only when allowed
  // uint16_t Slave_Latency, Conn_Int, Timeout;	// These variables can be used to get
  // values of connection parameters
@@ -209,6 +211,7 @@ int main(void)
   // Scheduler
   while (1)
   {
+
 	    /* Event pointer for handling events */
 	    struct gecko_cmd_packet* evt;
 
@@ -223,6 +226,9 @@ int main(void)
 	    	 * Here the system is set to start advertising immediately after boot procedure. */
 	    	case gecko_evt_system_boot_id:
 	    	{
+
+	    		bonding_failure_flag = false;
+
 
 	    		Notifications_Status = 0;
 
@@ -244,14 +250,17 @@ int main(void)
 	    		gecko_cmd_le_gap_start_advertising
 				(0, le_gap_general_discoverable, le_gap_connectable_scannable);
 
+	    		LCD_write("Advertising", LCD_ROW_ACTION);
+
 	    		gecko_cmd_sm_set_passkey(-1);	// random passkeys
-	    		gecko_cmd_sm_configure(0x0F, sm_io_capability_displayyesno);	// config for bondable with MITM
+	    		gecko_cmd_sm_configure(SM_Config, sm_io_capability_displayyesno);	// config for bondable with MITM
 
 	    		break;
 	    	}
 
 	    	case gecko_evt_sm_confirm_passkey_id:
 	    	{
+	    		passkey_event_entered = true;
 	    		uint32_t key;
 	    		key = evt->data.evt_sm_confirm_passkey.passkey; // reading passkey
 	    		char Passkey_String[7];
@@ -259,7 +268,8 @@ int main(void)
 	    		  			key);	// printing the passkey
 	    		LCD_write(Passkey_String, LCD_ROW_PASSKEY);
 	    		LCD_write("PB0-Accept PB1-Reject", LCD_ROW_ACTION);
-	    		valid_button_press = 1;
+	    	    NVIC_EnableIRQ(GPIO_EVEN_IRQn);
+	    	    NVIC_EnableIRQ(GPIO_ODD_IRQn);
 
 	    		break;
 	    	}
@@ -267,35 +277,48 @@ int main(void)
 	    	case gecko_evt_sm_bonded_id:
 	    	{
 	    		LCD_write("Bonded Successfully", LCD_ROW_ACTION);
+	    		LCD_write("Connected", LCD_ROW_CONNECTION);
+	    		bonding_failure_flag = false;
 	    		break;
 	    	}
 
 	    	case gecko_evt_sm_bonding_failed_id:
 	    	{
 	    		LCD_write("Bonding Failed", LCD_ROW_ACTION);
+	    		bonding_failure_flag = true;
+	    		gecko_cmd_le_connection_close(Connection_Handle);
 	    		break;
 	    	}
 
 	    	/*Connected*/
 	    	case gecko_evt_le_connection_opened_id:
 	    	{
-
-	    		LCD_write("Connected", LCD_ROW_CONNECTION);
+	    		LCD_write("Connection Opened", LCD_ROW_CONNECTION);
 
 	    		/*To get the connection handle value */
 	    		Connection_Handle = evt->data.evt_le_connection_opened.connection;//address, 6 bytes
-
-	    		gecko_cmd_sm_increase_security(Connection_Handle);	//Encrypting
 
 	    		bd_addr client_adr = evt->data.evt_le_connection_opened.address; // Reading client address
 	    		char client_addr_string[6];
 	    		snprintf(client_addr_string, sizeof(client_addr_string), "%0.2X:%0.2X", client_adr.addr[1], client_adr.addr[0]);
 	    		LCD_write(client_addr_string, LCD_ROW_CLIENTADDR);
 
-	    		//gecko_msg_system_get_bt_address_rsp_t
 	    		/*Setting Connection Parameters*/
-//	    		gecko_cmd_le_connection_set_parameters
-//				(Connection_Handle, Conn_Int_Min_Val, Conn_Int_Max_Val, Slave_Lat_Val, Timeout_Val);
+	    		gecko_cmd_le_connection_set_parameters
+				(Connection_Handle, Conn_Int_Min_Val, Conn_Int_Max_Val, Slave_Lat_Val, Timeout_Val);
+
+	    		bonding_state = evt->data.evt_le_connection_opened.bonding;
+
+	    		if(bonding_state != No_Bonding)
+	    		{
+	    			LCD_write("Already Bonded", LCD_ROW_ACTION);
+	    			LCD_write("Connected", LCD_ROW_CONNECTION);
+	    			gecko_cmd_sm_increase_security(Connection_Handle);	//Encrypting
+	    		}
+	    		else
+	    		{
+	    			gecko_cmd_sm_increase_security(Connection_Handle);	//Encrypting
+	    		}
 
 	    		break;
 	    	}
@@ -313,7 +336,11 @@ int main(void)
 	    	{
 
 	    		LCD_write("Disconnected", LCD_ROW_CONNECTION);
-	    		LCD_write("            ", LCD_ROW_TEMPVALUE); // Clearing temperature value
+	    		LCD_write(" ", LCD_ROW_CLIENTADDR);
+	    		LCD_write(" ", LCD_ROW_PASSKEY);
+	    		LCD_write(" ", LCD_ROW_ACTION);
+	    		LCD_write(" ", LCD_ROW_TEMPVALUE);
+
 
 	    		// Reset notification status
 	    		Notifications_Status = 0;
@@ -331,6 +358,7 @@ int main(void)
 	    		{
 	    			/* Restart advertising after client has disconnected */
 	    			gecko_cmd_le_gap_start_advertising(0, le_gap_general_discoverable, le_gap_connectable_scannable);
+	    			LCD_write("Advertising", LCD_ROW_ACTION);
 	    		}
 
 	    		break;
@@ -341,23 +369,26 @@ int main(void)
 	    	 * GATT client was received upon a successful reception of the indication*/
 	    	case gecko_evt_gatt_server_characteristic_status_id:
 	    	{
-	    		/* Checking for both - the characteristic ID and the change in characteristic status*/
-	    		if((evt->data.evt_gatt_server_characteristic_status.characteristic == gattdb_temperature_measurement)
-	    				&& (evt->data.evt_gatt_server_characteristic_status.status_flags == 0x01))
+	    		if(bonding_failure_flag == false)
 	    		{
-	    			/* If notifications are enabled, then proceed with temp measurement*/
-	    			if(evt->data.evt_gatt_server_characteristic_status.client_config_flags == 0x02)
-	    			{
-	    				Notifications_Status = 1;
-	    				LETIMER_Enable(LETIMER0, true);
-	    			}
+		    		/* Checking for both - the characteristic ID and the change in characteristic status*/
+		    		if((evt->data.evt_gatt_server_characteristic_status.characteristic == gattdb_temperature_measurement)
+		    				&& (evt->data.evt_gatt_server_characteristic_status.status_flags == Change_in_Characteristic_Status))
+		    		{
+		    			/* If notifications are enabled, then proceed with temp measurement*/
+		    			if(evt->data.evt_gatt_server_characteristic_status.client_config_flags == Indications_Enabled)
+		    			{
+		    				Notifications_Status = 1;
+		    				LETIMER_Enable(LETIMER0, true);
+		    			}
 
-	    			/* If notifications are disabled then stop the timer*/
-	    			else if(evt->data.evt_gatt_server_characteristic_status.client_config_flags == 0x00)
-	    			{
-	    				Notifications_Status = 0;
-	    				LETIMER_Enable(LETIMER0, false);
-	    			}
+		    			/* If notifications are disabled then stop the timer*/
+		    			else if(evt->data.evt_gatt_server_characteristic_status.client_config_flags == Indications_Enabled)
+		    			{
+		    				Notifications_Status = 0;
+		    				LETIMER_Enable(LETIMER0, false);
+		    			}
+		    		}
 	    		}
 
 	    		break;
@@ -367,29 +398,38 @@ int main(void)
 	    	case gecko_evt_system_external_signal_id:
 	    	{
     			// Reading event ID in case of multiple events
-    			Event_Read = evt->data.evt_system_external_signal.extsignals;
-    			if(Event_Read == Event_Button0_Pressed) // Searching for button0 ISR
-    			{
-    	    		if(button0_read == 1)	//Button is pressed
-    	    		{
-    	    			gecko_cmd_sm_passkey_confirm(Connection_Handle, true);
-    	    			LCD_write("Passkey Confirmed", LCD_ROW_ACTION);
-    	    			button0_read = 0;
-    	    		}
-    	    		LCD_write("            ", LCD_ROW_PASSKEY);
-    			}
-    			else if(Event_Read == Event_Button1_Pressed)
-    			{
-    	    		if(button1_read == 1)
-    	    		{
-    	    			gecko_cmd_sm_passkey_confirm(Connection_Handle, false);
-    	    			LCD_write("Passkey Rejected", LCD_ROW_PASSKEY);
-    	    			button1_read = 0;
-    	    		}
-    	    		LCD_write("            ", LCD_ROW_TEMPVALUE);
-    			}
+	//    		if(passkey_event_entered == true)
+	  //  		{
+	    			Event_Read = evt->data.evt_system_external_signal.extsignals;
+	    			if(Event_Read == Event_Button0_Pressed) // Searching for button0 ISR
+	    			{
+	    	    		if(button0_read == true)	//Button is pressed
+	    	    		{
+	    	    			if(passkey_event_entered == true)
+	    	    			{
+		    	    			gecko_cmd_sm_passkey_confirm(Connection_Handle, true);
+		    	    			LCD_write("Passkey Confirmed", LCD_ROW_ACTION);
+		    	    			button0_read = false;
+	    	    			}
+	    	    		}
+	    	    		LCD_write("            ", LCD_ROW_PASSKEY);
+	    			}
+	    			else if(Event_Read == Event_Button1_Pressed)
+	    			{
+	    	    		if(button1_read == true)
+	    	    		{
+	    	    			if(passkey_event_entered == true)
+	    	    			{
+		    	    			gecko_cmd_sm_passkey_confirm(Connection_Handle, false);
+		    	    			LCD_write("Passkey Rejected", LCD_ROW_PASSKEY);
+		    	    			button1_read = false;
+	    	    			}
+	    	    		}
+	    	    		LCD_write("            ", LCD_ROW_TEMPVALUE);
+	    			}
+//	    		}
 	    		/* Proceed with sensor interface only if notifications are enabled*/
-	    		if(Notifications_Status == 1)
+	    		if(Notifications_Status == true)
 	    		{
 	    			if(Event_Read == Event_Letimer_Period_Reached)
 	    			{
@@ -418,8 +458,8 @@ int main(void)
 	    		uint32_t temperature1, temperature2;
 	    		temperature1 = Si7021_Temperature_C / 1000;
 	    		temperature2 = Si7021_Temperature_C - (temperature1 * 1000);
-	    		char temperature_print[18];
-	    		snprintf(temperature_print, 18, "%0.2ld.%0.3ldC", temperature1, temperature2);
+	    		char temperature_print[Temperature_Print_Length];
+	    		snprintf(temperature_print, Temperature_Print_Length, "%0.2ld.%0.3ldC", temperature1, temperature2);
 	    		LCD_write(temperature_print, LCD_ROW_TEMPVALUE);
 
 	    		// Switching off timer so that it doesn't generate event

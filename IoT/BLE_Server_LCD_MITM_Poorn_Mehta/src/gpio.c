@@ -27,7 +27,6 @@ void Button0_Init(void)
 	int_clear = GPIO_IntGet();
 	GPIO_IntClear(int_clear);
 	GPIO_IntConfig(Button0_port, Button0_pin, false, true, true);
-	NVIC_EnableIRQ(GPIO_EVEN_IRQn);
 }
 
 void Button1_Init(void)
@@ -36,7 +35,6 @@ void Button1_Init(void)
 	int_clear = GPIO_IntGet();
 	GPIO_IntClear(int_clear);
 	GPIO_IntConfig(Button1_port, Button1_pin, false, true, true);
-	NVIC_EnableIRQ(GPIO_ODD_IRQn);
 }
 
 void gpio_init(void)

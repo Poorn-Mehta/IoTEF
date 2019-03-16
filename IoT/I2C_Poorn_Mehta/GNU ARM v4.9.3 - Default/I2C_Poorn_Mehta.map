@@ -170,8 +170,6 @@ Discarded input sections
  .text          0x00000000        0x0 ./main.o
  .data          0x00000000        0x0 ./main.o
  .bss           0x00000000        0x0 ./main.o
- .bss.boot_to_dfu
-                0x00000000        0x1 ./main.o
  .text          0x00000000        0x0 ./pti.o
  .data          0x00000000        0x0 ./pti.o
  .bss           0x00000000        0x0 ./pti.o
@@ -4149,31 +4147,31 @@ OUTPUT(I2C_Poorn_Mehta.axf elf32-littlearm)
  .comment       0x00000000       0x7f C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\radio\rail_lib\autogen\librail_release\librail_efr32xg13_gcc_release.a(synth.o)
  .comment       0x00000000       0x7f C:\Users\poorn\SimplicityStudio\v4_workspace\I2C_Poorn_Mehta\platform\radio\rail_lib\autogen\librail_release\librail_efr32xg13_gcc_release.a(generic_phy.o)
 
-.debug_info     0x00000000    0x15f65
+.debug_info     0x00000000    0x15f53
  .debug_info    0x00000000      0x168 ./application_properties.o
  .debug_info    0x00000168      0x5ae ./gatt_db.o
  .debug_info    0x00000716      0x550 ./init_board.o
  .debug_info    0x00000c66      0xbf0 ./init_mcu.o
- .debug_info    0x00001856     0x11a7 ./main.o
- .debug_info    0x000029fd     0x4084 ./hardware/kit/common/drivers/mx25flash_spi.o
- .debug_info    0x00006a81      0x21d ./platform/Device/SiliconLabs/EFR32BG13P/Source/GCC/startup_efr32bg13p.o
- .debug_info    0x00006c9e      0x8c2 ./platform/Device/SiliconLabs/EFR32BG13P/Source/system_efr32bg13p.o
- .debug_info    0x00007560     0x35d0 ./platform/emlib/src/em_cmu.o
- .debug_info    0x0000ab30      0xdce ./platform/emlib/src/em_core.o
- .debug_info    0x0000b8fe     0x2c04 ./platform/emlib/src/em_emu.o
- .debug_info    0x0000e502      0xf45 ./platform/emlib/src/em_gpio.o
- .debug_info    0x0000f447      0xaa9 ./platform/emlib/src/em_i2c.o
- .debug_info    0x0000fef0      0x4ff ./platform/emlib/src/em_letimer.o
- .debug_info    0x000103ef      0xbbb ./platform/emlib/src/em_rtcc.o
- .debug_info    0x00010faa      0x989 ./platform/emlib/src/em_timer.o
- .debug_info    0x00011933     0x10e6 ./platform/emlib/src/em_usart.o
- .debug_info    0x00012a19      0xc7e ./src/Custom_I2C0.o
- .debug_info    0x00013697      0xfec ./src/Custom_LETIMER0.o
- .debug_info    0x00014683      0x2e9 ./src/Custom_Si7021.o
- .debug_info    0x0001496c      0x47e ./src/Custom_Sleep.o
- .debug_info    0x00014dea      0xc81 ./src/Custom_Timer0.o
- .debug_info    0x00015a6b      0x285 ./src/cmu.o
- .debug_info    0x00015cf0      0x275 ./src/gpio.o
+ .debug_info    0x00001856     0x1195 ./main.o
+ .debug_info    0x000029eb     0x4084 ./hardware/kit/common/drivers/mx25flash_spi.o
+ .debug_info    0x00006a6f      0x21d ./platform/Device/SiliconLabs/EFR32BG13P/Source/GCC/startup_efr32bg13p.o
+ .debug_info    0x00006c8c      0x8c2 ./platform/Device/SiliconLabs/EFR32BG13P/Source/system_efr32bg13p.o
+ .debug_info    0x0000754e     0x35d0 ./platform/emlib/src/em_cmu.o
+ .debug_info    0x0000ab1e      0xdce ./platform/emlib/src/em_core.o
+ .debug_info    0x0000b8ec     0x2c04 ./platform/emlib/src/em_emu.o
+ .debug_info    0x0000e4f0      0xf45 ./platform/emlib/src/em_gpio.o
+ .debug_info    0x0000f435      0xaa9 ./platform/emlib/src/em_i2c.o
+ .debug_info    0x0000fede      0x4ff ./platform/emlib/src/em_letimer.o
+ .debug_info    0x000103dd      0xbbb ./platform/emlib/src/em_rtcc.o
+ .debug_info    0x00010f98      0x989 ./platform/emlib/src/em_timer.o
+ .debug_info    0x00011921     0x10e6 ./platform/emlib/src/em_usart.o
+ .debug_info    0x00012a07      0xc7e ./src/Custom_I2C0.o
+ .debug_info    0x00013685      0xfec ./src/Custom_LETIMER0.o
+ .debug_info    0x00014671      0x2e9 ./src/Custom_Si7021.o
+ .debug_info    0x0001495a      0x47e ./src/Custom_Sleep.o
+ .debug_info    0x00014dd8      0xc81 ./src/Custom_Timer0.o
+ .debug_info    0x00015a59      0x285 ./src/cmu.o
+ .debug_info    0x00015cde      0x275 ./src/gpio.o
 
 .debug_abbrev   0x00000000     0x3313
  .debug_abbrev  0x00000000       0x97 ./application_properties.o
@@ -4277,7 +4275,7 @@ OUTPUT(I2C_Poorn_Mehta.axf elf32-littlearm)
  .debug_line    0x00006347      0x25e ./src/cmu.o
  .debug_line    0x000065a5      0x263 ./src/gpio.o
 
-.debug_str      0x00000000     0x5f65
+.debug_str      0x00000000     0x5f59
  .debug_str     0x00000000      0x25a ./application_properties.o
                                 0x2a4 (size before relaxing)
  .debug_str     0x0000025a      0x574 ./gatt_db.o
@@ -4286,45 +4284,45 @@ OUTPUT(I2C_Poorn_Mehta.axf elf32-littlearm)
                                 0x62c (size before relaxing)
  .debug_str     0x00000c18      0x86e ./init_mcu.o
                                 0xd50 (size before relaxing)
- .debug_str     0x00001486      0x6c0 ./main.o
-                                0x9cb (size before relaxing)
- .debug_str     0x00001b46      0x65a ./hardware/kit/common/drivers/mx25flash_spi.o
+ .debug_str     0x00001486      0x6b4 ./main.o
+                                0x9bf (size before relaxing)
+ .debug_str     0x00001b3a      0x65a ./hardware/kit/common/drivers/mx25flash_spi.o
                                 0xfa9 (size before relaxing)
- .debug_str     0x000021a0       0xfb ./platform/Device/SiliconLabs/EFR32BG13P/Source/GCC/startup_efr32bg13p.o
+ .debug_str     0x00002194       0xfb ./platform/Device/SiliconLabs/EFR32BG13P/Source/GCC/startup_efr32bg13p.o
                                 0x2e1 (size before relaxing)
- .debug_str     0x0000229b      0x369 ./platform/Device/SiliconLabs/EFR32BG13P/Source/system_efr32bg13p.o
+ .debug_str     0x0000228f      0x369 ./platform/Device/SiliconLabs/EFR32BG13P/Source/system_efr32bg13p.o
                                 0x670 (size before relaxing)
- .debug_str     0x00002604      0xe5e ./platform/emlib/src/em_cmu.o
+ .debug_str     0x000025f8      0xe5e ./platform/emlib/src/em_cmu.o
                                0x1a27 (size before relaxing)
- .debug_str     0x00003462      0x5ec ./platform/emlib/src/em_core.o
+ .debug_str     0x00003456      0x5ec ./platform/emlib/src/em_core.o
                                 0x8bf (size before relaxing)
- .debug_str     0x00003a4e      0xb9e ./platform/emlib/src/em_emu.o
+ .debug_str     0x00003a42      0xb9e ./platform/emlib/src/em_emu.o
                                0x1ca5 (size before relaxing)
- .debug_str     0x000045ec      0x19d ./platform/emlib/src/em_gpio.o
+ .debug_str     0x000045e0      0x19d ./platform/emlib/src/em_gpio.o
                                 0x879 (size before relaxing)
- .debug_str     0x00004789      0x2ed ./platform/emlib/src/em_i2c.o
+ .debug_str     0x0000477d      0x2ed ./platform/emlib/src/em_i2c.o
                                 0x8bd (size before relaxing)
- .debug_str     0x00004a76      0x1a3 ./platform/emlib/src/em_letimer.o
+ .debug_str     0x00004a6a      0x1a3 ./platform/emlib/src/em_letimer.o
                                 0x452 (size before relaxing)
- .debug_str     0x00004c19      0x385 ./platform/emlib/src/em_rtcc.o
+ .debug_str     0x00004c0d      0x385 ./platform/emlib/src/em_rtcc.o
                                 0xab7 (size before relaxing)
- .debug_str     0x00004f9e      0x6cb ./platform/emlib/src/em_timer.o
+ .debug_str     0x00004f92      0x6cb ./platform/emlib/src/em_timer.o
                                 0x9d2 (size before relaxing)
- .debug_str     0x00005669      0x69b ./platform/emlib/src/em_usart.o
+ .debug_str     0x0000565d      0x69b ./platform/emlib/src/em_usart.o
                                 0xf5c (size before relaxing)
- .debug_str     0x00005d04       0x9d ./src/Custom_I2C0.o
+ .debug_str     0x00005cf8       0x9d ./src/Custom_I2C0.o
                                 0xbb7 (size before relaxing)
- .debug_str     0x00005da1       0xc4 ./src/Custom_LETIMER0.o
+ .debug_str     0x00005d95       0xc4 ./src/Custom_LETIMER0.o
                                 0xf17 (size before relaxing)
- .debug_str     0x00005e65       0x4e ./src/Custom_Si7021.o
+ .debug_str     0x00005e59       0x4e ./src/Custom_Si7021.o
                                 0x3c7 (size before relaxing)
- .debug_str     0x00005eb3       0x24 ./src/Custom_Sleep.o
+ .debug_str     0x00005ea7       0x24 ./src/Custom_Sleep.o
                                 0x41e (size before relaxing)
- .debug_str     0x00005ed7       0x73 ./src/Custom_Timer0.o
+ .debug_str     0x00005ecb       0x73 ./src/Custom_Timer0.o
                                 0xd9d (size before relaxing)
- .debug_str     0x00005f4a        0xd ./src/cmu.o
+ .debug_str     0x00005f3e        0xd ./src/cmu.o
                                 0x4bf (size before relaxing)
- .debug_str     0x00005f57        0xe ./src/gpio.o
+ .debug_str     0x00005f4b        0xe ./src/gpio.o
                                 0x4c3 (size before relaxing)
 
 .debug_loc      0x00000000     0x946c
