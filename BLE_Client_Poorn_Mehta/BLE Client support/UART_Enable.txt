@@ -1,0 +1,29 @@
+1. Change in hal-config.h
+	#define HAL_VCOM_ENABLE                   (0)
+	TO 
+	#define HAL_VCOM_ENABLE                   (1)
+
+2. 
+	2.1 Copy "retargetserialhalconfig.h" 
+	From: ${StudioSdkPath}\hardware\kit\common\halconfig 
+	To:   {projectPath}\hardware\kit\common\halconfig
+	*IF NOT ALREADY PRESENT
+
+	2.2 Copy "retargetio.c", "retargetserial.c", "retargetserial.h"  
+	From: {SDKPATH}\hardware\kit\common\drivers 
+	To:   {projectPath}\hardware\kit\common\drivers
+	*IF NOT ALREADY PRESENT
+
+3. 
+	3.1 In main.c file
+		Include #include "retargetserial.h"
+
+	3.2 Call the below functions in main before while(1)
+		RETARGET_SerialInit();
+		RETARGET_SerialCrLf(true);		//this is used for proper display of the UART on TERA TERM. If TERA TERM settings are changed, this line can be avoided
+
+	And use normal printf to write data to the UART.
+
+#cuboulder
+#foreverbuffs
+#happycoding
